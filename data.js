@@ -1,0 +1,308 @@
+/**
+ * EduAttend - Mock Database
+ * Realistic student records, classes, schedules, and alerts matching the Stitch design
+ */
+
+const INITIAL_CLASSES = [
+  { id: 'CS101', name: 'Intro to Computer Science', room: 'Hall A-102', time: '09:00 AM - 10:30 AM', days: ['Mon', 'Wed', 'Fri'], enrolled: 24, instructor: 'Prof. Sarah Jenkins', color: 'primary' },
+  { id: 'PHY201', name: 'Advanced Physics', room: 'Lab B-204', time: '11:00 AM - 12:30 PM', days: ['Tue', 'Thu'], enrolled: 28, instructor: 'Prof. Sarah Jenkins', color: 'physics' },
+  { id: 'MAT305', name: 'Linear Algebra & Calculus', room: 'Hall C-101', time: '01:30 PM - 03:00 PM', days: ['Mon', 'Wed'], enrolled: 32, instructor: 'Prof. Sarah Jenkins', color: 'math' },
+  { id: 'BIO201', name: 'Cellular Biology', room: 'Lab C-302', time: '10:00 AM - 11:30 AM', days: ['Tue', 'Fri'], enrolled: 22, instructor: 'Prof. Sarah Jenkins', color: 'bio' },
+  { id: 'ENG204', name: 'Technical Communications', room: 'Seminar 12', time: '02:00 PM - 03:30 PM', days: ['Thu'], enrolled: 26, instructor: 'Prof. Sarah Jenkins', color: 'primary' },
+  { id: 'ART105', name: 'Visual Media Design', room: 'Studio 4', time: '03:30 PM - 05:00 PM', days: ['Wed', 'Fri'], enrolled: 20, instructor: 'Prof. Sarah Jenkins', color: 'physics' }
+];
+
+const INITIAL_STUDENTS = [
+  {
+    id: 1,
+    studentId: 'STU-1042',
+    name: 'Jonathan Doe',
+    avatarInitials: 'JD',
+    avatarUrl: '',
+    classId: 'CS101',
+    className: 'CS101 - Intro to CS',
+    email: 'j.doe@student.edu',
+    phone: '+1 (555) 019-2834',
+    status: 'active',
+    attendedClasses: 15,
+    totalClasses: 15,
+    attendanceRate: 100
+  },
+  {
+    id: 2,
+    studentId: 'STU-1043',
+    name: 'Maria Garcia',
+    avatarInitials: 'MG',
+    avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA8dQXpzbd_2n2xKp3pT4xVPZA0PSF4NPNOColEhDjloKDtpRohMsNEo5UdLciaf5ppvcneNpWgv_kki4XU0F_9od4tzTnC6olz3RujQIJ3cBANGSf1lcTu_QRwawerxXhmNtuCRJyvmTqGObRLKnyZ3GALKV3tWv7590-tbez-gv23Dvi6OEp_XLkLGkXw7No3HHmeIDnN-WMVPICAZ0Y56F2JGzy8W30tIAhGdc1fZLBTsyxDlmllog',
+    classId: 'PHY201',
+    className: 'PHY201 - Advanced Physics',
+    email: 'm.garcia@student.edu',
+    phone: '+1 (555) 019-8822',
+    status: 'active',
+    attendedClasses: 14,
+    totalClasses: 15,
+    attendanceRate: 93.3
+  },
+  {
+    id: 3,
+    studentId: 'STU-0988',
+    name: 'Thomas Chen',
+    avatarInitials: 'TC',
+    avatarUrl: '',
+    classId: 'MAT305',
+    className: 'MAT305 - Linear Algebra',
+    email: 't.chen@student.edu',
+    phone: '+1 (555) 019-4451',
+    status: 'inactive',
+    attendedClasses: 10,
+    totalClasses: 15,
+    attendanceRate: 66.7
+  },
+  {
+    id: 4,
+    studentId: 'STU-1045',
+    name: 'Alexei Volkov',
+    avatarInitials: 'AV',
+    avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCFu3z0dB9WDTq5seUIyU0L7ArDpSlWeV2AWpx3gWSB4OKU-dl4Gk9WrgeRwJ43ZTUpKMWP2dzZpFnU-PcnCBcEPnVAtpe0srvwIlKobkzGQKGBNMqSTKVZU9uByk27WHkJfct38hAegvOZ0w1wwUzB-OO8P2-b2Z7nIUCy825o5o5YJl8tRG8OababWfBj_oD6tDTkr1vgVyWXSVKdPU2a8Br-O9D_7Fu8ynpKTHGgqwuNdyrezvE98g',
+    classId: 'CS101',
+    className: 'CS101 - Intro to CS',
+    email: 'a.volkov@student.edu',
+    phone: '+1 (555) 019-9002',
+    status: 'active',
+    attendedClasses: 14,
+    totalClasses: 15,
+    attendanceRate: 93.3
+  },
+  {
+    id: 5,
+    studentId: 'STU-8492',
+    name: 'Marcus Johnson',
+    avatarInitials: 'MJ',
+    avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCCa4H-u6vMK9vMfN1B-YC8CfsK3BepvUfmY2H3r_ZY5I0BzhnP1-Crgug_0Pkqi2TR0u-4XxBYRGIn44dGEfziqpMvTJH1_kXcXRL-QJ8_j0mQtKSqx9pkggg-4Q_E-r0TRbFbRMKd2ONmbyIepyn2-zyGhnTEcYAaLlUatny6QelTemOCrn0UOwS2c4c58IA4DEmkvXCsnOKOyebeKZZLPcIu2b4yCN_Npy2Akh_6Ti7YhuOk9_GsNA',
+    classId: 'CS101',
+    className: 'CS101 - Intro to CS',
+    email: 'm.johnson@student.edu',
+    phone: '+1 (555) 019-3311',
+    status: 'active',
+    attendedClasses: 15,
+    totalClasses: 15,
+    attendanceRate: 100
+  },
+  {
+    id: 6,
+    studentId: 'STU-9122',
+    name: 'Elena Rodriguez',
+    avatarInitials: 'ER',
+    avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAkuA2u1hly9GjcnuxbjSxVkRCg8dgF-urzzcUEdaLvaQVVOAnn3rrvYzlp8wCgXnekND47uVKB7iDGiW5xvckYGa2SM3fUCoHNmc625axdolr73ZR-nHb6UViuPiKceBcXuh7LBZFg58rrt86LFsYUqbYE2OlwN9X9EWDpcFetylTAeaj2nD1pbSJI9lW46t6v98IIzNBW5yXvBlfkA-tebDbkg8VmCbW-PFSWmSqYLOFUFFFySRFcjg',
+    classId: 'CS101',
+    className: 'CS101 - Intro to CS',
+    email: 'e.rodriguez@student.edu',
+    phone: '+1 (555) 019-7744',
+    status: 'active',
+    attendedClasses: 14,
+    totalClasses: 15,
+    attendanceRate: 93.3
+  },
+  {
+    id: 7,
+    studentId: 'STU-7451',
+    name: 'Thomas Wright',
+    avatarInitials: 'TW',
+    avatarUrl: '',
+    classId: 'CS101',
+    className: 'CS101 - Intro to CS',
+    email: 't.wright@student.edu',
+    phone: '+1 (555) 019-6120',
+    status: 'active',
+    attendedClasses: 11,
+    totalClasses: 15,
+    attendanceRate: 73.3
+  },
+  {
+    id: 8,
+    studentId: 'STU-6390',
+    name: 'David Chen',
+    avatarInitials: 'DC',
+    avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBxFSdtUX5YGYdSNJPY2mkKIvdwRRbBIizVLU0i2G6rjONQaWWGitA-xzFLiN8MaQzEncXEeH65nMWp4E8dvNAR7CQNlHqu6PrK_ZmT9e5IIT1tIJ2ILcts5O5_HsZjcRv73MpCepMBUm3tFYUSDiSOc1SMG4elK-IenCsiNPjs3dn3JlzrJqkmT3wbo6PgUZ81jQXqbz7T-8ZPRii2s3bmNZvkaArgT-hGB7dIaYtMGPhmbh19YFsXig',
+    classId: 'CS101',
+    className: 'CS101 - Intro to CS',
+    email: 'd.chen@student.edu',
+    phone: '+1 (555) 019-5509',
+    status: 'active',
+    attendedClasses: 13,
+    totalClasses: 15,
+    attendanceRate: 86.7
+  },
+  {
+    id: 9,
+    studentId: 'STU-1050',
+    name: 'Aaliyah Abbott',
+    avatarInitials: 'AA',
+    avatarUrl: '',
+    classId: 'CS101',
+    className: 'CS101 - Intro to CS',
+    email: 'a.abbott@student.edu',
+    phone: '+1 (555) 019-1122',
+    status: 'active',
+    attendedClasses: 15,
+    totalClasses: 15,
+    attendanceRate: 100
+  },
+  {
+    id: 10,
+    studentId: 'STU-1051',
+    name: 'Benjamin Barnes',
+    avatarInitials: 'BB',
+    avatarUrl: '',
+    classId: 'CS101',
+    className: 'CS101 - Intro to CS',
+    email: 'b.barnes@student.edu',
+    phone: '+1 (555) 019-2233',
+    status: 'active',
+    attendedClasses: 14,
+    totalClasses: 15,
+    attendanceRate: 93.3
+  },
+  {
+    id: 11,
+    studentId: 'STU-1052',
+    name: 'Chloe Carter',
+    avatarInitials: 'CC',
+    avatarUrl: '',
+    classId: 'CS101',
+    className: 'CS101 - Intro to CS',
+    email: 'c.carter@student.edu',
+    phone: '+1 (555) 019-3344',
+    status: 'active',
+    attendedClasses: 15,
+    totalClasses: 15,
+    attendanceRate: 100
+  },
+  {
+    id: 12,
+    studentId: 'STU-1053',
+    name: 'Daniel Davis',
+    avatarInitials: 'DD',
+    avatarUrl: '',
+    classId: 'CS101',
+    className: 'CS101 - Intro to CS',
+    email: 'd.davis@student.edu',
+    phone: '+1 (555) 019-4455',
+    status: 'active',
+    attendedClasses: 12,
+    totalClasses: 15,
+    attendanceRate: 80.0
+  },
+  {
+    id: 13,
+    studentId: 'STU-1054',
+    name: 'Emma Evans',
+    avatarInitials: 'EE',
+    avatarUrl: '',
+    classId: 'CS101',
+    className: 'CS101 - Intro to CS',
+    email: 'e.evans@student.edu',
+    phone: '+1 (555) 019-5566',
+    status: 'active',
+    attendedClasses: 15,
+    totalClasses: 15,
+    attendanceRate: 100
+  },
+  {
+    id: 14,
+    studentId: 'STU-1055',
+    name: 'Finn Foster',
+    avatarInitials: 'FF',
+    avatarUrl: '',
+    classId: 'CS101',
+    className: 'CS101 - Intro to CS',
+    email: 'f.foster@student.edu',
+    phone: '+1 (555) 019-6677',
+    status: 'active',
+    attendedClasses: 13,
+    totalClasses: 15,
+    attendanceRate: 86.7
+  },
+  {
+    id: 15,
+    studentId: 'STU-1056',
+    name: 'Grace Garcia',
+    avatarInitials: 'GG',
+    avatarUrl: '',
+    classId: 'CS101',
+    className: 'CS101 - Intro to CS',
+    email: 'g.garcia@student.edu',
+    phone: '+1 (555) 019-7788',
+    status: 'active',
+    attendedClasses: 15,
+    totalClasses: 15,
+    attendanceRate: 100
+  },
+  {
+    id: 16,
+    studentId: 'STU-1057',
+    name: 'Henry Harris',
+    avatarInitials: 'HH',
+    avatarUrl: '',
+    classId: 'CS101',
+    className: 'CS101 - Intro to CS',
+    email: 'h.harris@student.edu',
+    phone: '+1 (555) 019-8899',
+    status: 'active',
+    attendedClasses: 11,
+    totalClasses: 15,
+    attendanceRate: 73.3
+  }
+];
+
+const INITIAL_ALERTS = [
+  {
+    id: 'alt-1',
+    type: 'high',
+    title: 'Consecutive Absences',
+    time: '10m ago',
+    description: 'Marcus Johnson (CS101) has missed 3 consecutive classes.',
+    actionText: 'Contact Student',
+    studentId: 'STU-8492'
+  },
+  {
+    id: 'alt-2',
+    type: 'medium',
+    title: 'Low Attendance Warning',
+    time: '1h ago',
+    description: 'MATH301 overall attendance dropped below 70% today.',
+    actionText: 'View Class Details',
+    classId: 'MAT305'
+  },
+  {
+    id: 'alt-3',
+    type: 'high',
+    title: 'Unexcused Absence',
+    time: '2h ago',
+    description: 'Sarah Connor missed exam period for PHY101.',
+    actionText: 'Resolve Issue',
+    studentId: 'STU-1043'
+  },
+  {
+    id: 'alt-4',
+    type: 'info',
+    title: 'Roster Updated',
+    time: 'Yesterday',
+    description: '5 new students added to BIO201 course list.',
+    actionText: 'View Roster',
+    classId: 'BIO201'
+  }
+];
+
+const INITIAL_SCHEDULE = [
+  { day: 'Mon', time: '09:00 AM - 10:30 AM', classId: 'CS101', className: 'CS101: Intro to CS', room: 'Hall A-102', color: 'primary' },
+  { day: 'Mon', time: '01:30 PM - 03:00 PM', classId: 'MAT305', className: 'MAT305: Linear Algebra', room: 'Hall C-101', color: 'math' },
+  { day: 'Tue', time: '10:00 AM - 11:30 AM', classId: 'BIO201', className: 'BIO201: Cell Biology', room: 'Lab C-302', color: 'bio' },
+  { day: 'Tue', time: '11:00 AM - 12:30 PM', classId: 'PHY201', className: 'PHY201: Physics', room: 'Lab B-204', color: 'physics' },
+  { day: 'Wed', time: '09:00 AM - 10:30 AM', classId: 'CS101', className: 'CS101: Intro to CS', room: 'Hall A-102', color: 'primary' },
+  { day: 'Wed', time: '01:30 PM - 03:00 PM', classId: 'MAT305', className: 'MAT305: Linear Algebra', room: 'Hall C-101', color: 'math' },
+  { day: 'Thu', time: '11:00 AM - 12:30 PM', classId: 'PHY201', className: 'PHY201: Physics', room: 'Lab B-204', color: 'physics' },
+  { day: 'Thu', time: '02:00 PM - 03:30 PM', classId: 'ENG204', className: 'ENG204: Tech Comms', room: 'Seminar 12', color: 'primary' },
+  { day: 'Fri', time: '09:00 AM - 10:30 AM', classId: 'CS101', className: 'CS101: Intro to CS', room: 'Hall A-102', color: 'primary' },
+  { day: 'Fri', time: '03:30 PM - 05:00 PM', classId: 'ART105', className: 'ART105: Visual Media', room: 'Studio 4', color: 'physics' }
+];
